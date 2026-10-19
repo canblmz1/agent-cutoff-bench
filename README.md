@@ -105,7 +105,11 @@ A self-contained reproduction that needs no server is in
   | Cut-off call returned by `invoke()` | looks valid | invalid | invalid |
 
   The patch applies to `langchain-ai/langchain` at `d670a3a` (October 19, 2026)
-  with 6 new tests, 3 of which fail without it. `make lint` passes; the full
+  with 6 new tests, 3 of which fail without it. `libs/core/langchain_core/messages/ai.py`
+  at that commit has the same SHA-256 as the file shipped in 1.6.12
+  (`3a41fb1c38115bae737a1131e187177b46e665a48cc810117bf707058521bf0e`), and
+  no commit has touched it since October 1, so the patch needs no rebase.
+  `make lint` passes; the full
   `langchain-core` unit suite has no new failures (9 tests that need DNS fail
   with or without it). With the patch, the LangGraph rows above become "not run"
   for `length` and `drop`: [`results/with-core-fix/`](results/with-core-fix/).
@@ -183,6 +187,13 @@ Each run records its versions in `results/runs.jsonl`.
 - After the fix, a streamed LangGraph run with a cut-off call ends with an
   empty answer, exactly as the non-streaming run already does. How an agent
   should surface `invalid_tool_calls` to the user is outside this bench.
+- The fix is in the parser, and LangGraph has no second line of defence:
+  `libs/prebuilt/langgraph/langgraph/prebuilt/tool_node.py` at
+  `langchain-ai/langgraph` `main` (October 19, 2026) contains no reference to
+  `finish_reason`, `invalid_tool_calls`, or truncation — it runs whatever is in
+  `message.tool_calls`. So any path that produces a well-formed-looking
+  truncated call still runs. Checking `finish_reason` in the agent layer is a
+  separate change, not covered here.
 
 ## Write-up
 
