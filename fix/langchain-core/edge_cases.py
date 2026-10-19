@@ -1,4 +1,4 @@
-"""Two edge cases any fix for cut-off streamed tool calls should get right.
+"""Edge cases any fix for cut-off streamed tool calls should get right.
 
 Run it against any langchain-core build:  python edge_cases.py
 """
@@ -35,3 +35,17 @@ print("   ->", "OK" if not full.tool_calls else "cut-off call still looks valid"
 msg = message_chunk_to_message(streamed(cut_off))
 print("3. invoke()-style message tool_calls:", msg.tool_calls, "| invalid:", len(msg.invalid_tool_calls))
 print("   ->", "OK" if not msg.tool_calls else "cut-off call still looks valid")
+
+# 4. Two calls in one stream, one complete and one cut off. Only the cut one
+#    should be dropped -- the complete one still has work to do.
+both = AIMessageChunk(
+    content="",
+    tool_call_chunks=[
+        tool_call_chunk(name="w", args='{"path": "b.txt"}', id="1", index=0),
+        tool_call_chunk(name="w", args=cut_off, id="2", index=1),
+    ],
+) + AIMessageChunk(content="", chunk_position="last")
+kept = [t["id"] for t in both.tool_calls]
+dropped = [t["id"] for t in both.invalid_tool_calls]
+print("4. parallel calls, kept:", kept, "| invalid:", dropped)
+print("   ->", "OK" if kept == ["1"] and dropped == ["2"] else "wrong split: a complete call was dropped, or a cut one survived")

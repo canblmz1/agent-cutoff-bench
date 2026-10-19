@@ -54,9 +54,10 @@ cut-off call, and the complete call still runs.
 
 Both sides had already been reported upstream: Python in langchain#41285 and
 JavaScript in langchainjs#11469. What the bench adds is the end-to-end result,
-the comparison with other frameworks, and two edge cases for the fix: a
-complete call that contains a raw newline must still run, and a cut-off call
-must also be rejected when you sum the chunks yourself. The patch, its tests, a
+the comparison with other frameworks, and three edge cases for the fix: a
+complete call that contains a raw newline must still run, a cut-off call
+must also be rejected when you sum the chunks yourself, and in a stream that
+carries two calls only the cut one may be dropped. The patch, its tests, a
 twenty-line reproduction and an edge-case script are in the repository. On the
 JavaScript side, the proposed fix (not merged) only covers the output-limit
 case, not a stream that simply ends.

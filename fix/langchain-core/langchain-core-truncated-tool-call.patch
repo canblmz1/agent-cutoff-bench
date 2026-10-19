@@ -37,7 +37,7 @@ index 5dccc33..1a2ab2d 100644
                  args_ = parse_partial_json(chunk["args"]) if chunk["args"] else {}
                  if isinstance(args_, dict):
 diff --git a/libs/core/tests/unit_tests/messages/test_ai.py b/libs/core/tests/unit_tests/messages/test_ai.py
-index 1b8da55..79f4b1d 100644
+index 1b8da55..c421ea6 100644
 --- a/libs/core/tests/unit_tests/messages/test_ai.py
 +++ b/libs/core/tests/unit_tests/messages/test_ai.py
 @@ -1,7 +1,12 @@
@@ -63,7 +63,7 @@ index 1b8da55..79f4b1d 100644
  
  
  def test_serdes_message() -> None:
-@@ -588,3 +595,137 @@ def test_content_blocks_reasoning_extraction() -> None:
+@@ -588,3 +595,153 @@ def test_content_blocks_reasoning_extraction() -> None:
      content_blocks = message.content_blocks
      assert len(content_blocks) == 1
      assert content_blocks[0]["type"] == "text"
@@ -125,6 +125,22 @@ index 1b8da55..79f4b1d 100644
 +        ("a", {"x": 1}),
 +        ("b", {}),
 +    ]
++
++
++def test_only_the_truncated_call_is_invalid_after_stream_ends() -> None:
++    # Parallel calls where only one is cut off: the complete call must stay
++    # executable, the cut one must not.
++    first = AIMessageChunk(
++        content="",
++        tool_call_chunks=[
++            create_tool_call_chunk(name="a", args='{"x": 1}', id="1", index=0),
++            create_tool_call_chunk(name="b", args='{"y": "line 0', id="2", index=1),
++        ],
++    )
++    final = first + AIMessageChunk(content="", chunk_position="last")
++    assert [tc["name"] for tc in final.tool_calls] == ["a"]
++    assert len(final.invalid_tool_calls) == 1
++    assert final.invalid_tool_calls[0]["name"] == "b"
 +
 +
 +def test_raw_control_characters_after_stream_ends() -> None:

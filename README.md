@@ -99,7 +99,7 @@ A self-contained reproduction that needs no server is in
   `AIMessageChunk.init_tool_calls` instead, once `chunk_position == "last"`,
   using `json.loads(..., strict=False)` like the non-streaming parser; a call
   that fails goes to `invalid_tool_calls` with the parse error, and mid-stream
-  parsing is unchanged. That placement matters in two cases, which
+  parsing is unchanged. That placement matters in three cases, which
   [`fix/langchain-core/edge_cases.py`](fix/langchain-core/edge_cases.py) checks
   on any build:
 
@@ -108,25 +108,27 @@ A self-contained reproduction that needs no server is in
   | Complete call whose string holds a raw newline (accepted without streaming) | runs | **marked invalid** | runs |
   | Cut-off call read from summed chunks (`full = full + chunk`) | looks valid | **looks valid** | invalid |
   | Cut-off call returned by `invoke()` | looks valid | invalid | invalid |
+  | Two calls in one stream, one complete and one cut off | both run | both run | only the complete one |
 
   The patch applies to `langchain-ai/langchain` at `d670a3a` (October 19, 2026);
   `git apply --check` against the files from that commit is clean.
   `libs/core/langchain_core/messages/ai.py` there has the same SHA-256 as the
   file shipped in 1.6.12
   (`3a41fb1c38115bae737a1131e187177b46e665a48cc810117bf707058521bf0e`), and
-  no commit has touched it since October 1, so no rebase is needed. It adds 6
-  tests; without the patch 3 of them fail. In `tests/unit_tests/messages/test_ai.py`
-  that is 19 passed / 3 failed without the patch and 22 passed with it.
+  no commit has touched it since October 1, so no rebase is needed. It adds 7
+  tests; without the patch 4 of them fail. In `tests/unit_tests/messages/test_ai.py`
+  that is 19 passed / 4 failed without the patch and 23 passed with it.
 
-  Full `langchain-core` unit suite, Windows 11 / CPython 3.11, measured both ways:
-  2,369 passed and 7 failed without the patch, 2,376 passed and 6 failed with
-  it. The failure sets are the same apart from one timing-sensitive rate-limit
-  test, which fails intermittently on its own (1–3 of its 10 cases across five
-  isolated runs). The stable failures are three symlink tests that need
-  `SeCreateSymbolicLinkPrivilege`, two indexing tests, and the rate-limit timing
-  tests — none of them in message parsing. `ruff check` is clean on the two
-  changed files and `ruff format --check` passes for all 360 files (four
-  pre-existing `ruff check` findings elsewhere in the tree are untouched).
+  Full `langchain-core` unit suite, Windows 11 / CPython 3.11, run both ways:
+  2,369 passed and 7 failed without the patch; 2,376–2,377 passed and 6–7
+  failed with it, the spread coming from a timing-sensitive rate-limit test
+  that fails intermittently on its own (1–3 of its 10 cases across five
+  isolated runs). Apart from that the failure sets are identical: three
+  symlink tests that need `SeCreateSymbolicLinkPrivilege`, two indexing tests,
+  and the rate-limit timing tests — none in message parsing. `ruff check` is
+  clean on the two changed files and `ruff format --check` passes for all 360
+  files (four pre-existing `ruff check` findings elsewhere in the tree are
+  untouched).
 
   With the patch, the LangGraph rows above become "not run"
   for `length` and `drop`: [`results/with-core-fix/`](results/with-core-fix/).
