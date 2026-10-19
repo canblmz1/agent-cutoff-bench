@@ -109,14 +109,26 @@ A self-contained reproduction that needs no server is in
   | Cut-off call read from summed chunks (`full = full + chunk`) | looks valid | **looks valid** | invalid |
   | Cut-off call returned by `invoke()` | looks valid | invalid | invalid |
 
-  The patch applies to `langchain-ai/langchain` at `d670a3a` (October 19, 2026)
-  with 6 new tests, 3 of which fail without it. `libs/core/langchain_core/messages/ai.py`
-  at that commit has the same SHA-256 as the file shipped in 1.6.12
+  The patch applies to `langchain-ai/langchain` at `d670a3a` (October 19, 2026);
+  `git apply --check` against the files from that commit is clean.
+  `libs/core/langchain_core/messages/ai.py` there has the same SHA-256 as the
+  file shipped in 1.6.12
   (`3a41fb1c38115bae737a1131e187177b46e665a48cc810117bf707058521bf0e`), and
-  no commit has touched it since October 1, so the patch needs no rebase.
-  `make lint` passes; the full
-  `langchain-core` unit suite has no new failures (9 tests that need DNS fail
-  with or without it). With the patch, the LangGraph rows above become "not run"
+  no commit has touched it since October 1, so no rebase is needed. It adds 6
+  tests; without the patch 3 of them fail. In `tests/unit_tests/messages/test_ai.py`
+  that is 19 passed / 3 failed without the patch and 22 passed with it.
+
+  Full `langchain-core` unit suite, Windows 11 / CPython 3.11, measured both ways:
+  2,369 passed and 7 failed without the patch, 2,376 passed and 6 failed with
+  it. The failure sets are the same apart from one timing-sensitive rate-limit
+  test, which fails intermittently on its own (1–3 of its 10 cases across five
+  isolated runs). The stable failures are three symlink tests that need
+  `SeCreateSymbolicLinkPrivilege`, two indexing tests, and the rate-limit timing
+  tests — none of them in message parsing. `ruff check` is clean on the two
+  changed files and `ruff format --check` passes for all 360 files (four
+  pre-existing `ruff check` findings elsewhere in the tree are untouched).
+
+  With the patch, the LangGraph rows above become "not run"
   for `length` and `drop`: [`results/with-core-fix/`](results/with-core-fix/).
 - **JavaScript:** reported in [langchainjs#11469](https://github.com/langchain-ai/langchainjs/issues/11469).
   [#11494](https://github.com/langchain-ai/langchainjs/pull/11494) (not merged)
