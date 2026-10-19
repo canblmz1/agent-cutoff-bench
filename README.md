@@ -75,7 +75,12 @@ argument object.
   non-streaming path, `langchain-openai` parses the same arguments with
   `json.loads` and reports them as `invalid_tool_calls`. In the same file,
   server tool calls are already parsed with `json.loads` once the stream ends
-  (`init_server_tool_calls`; if that fails, the block is left as it is).
+  (`init_server_tool_calls`; if that fails, the block is left as it is). The
+  output-parser path draws the same line explicitly: `parse_tool_call` uses
+  `parse_partial_json` only when the caller passes `partial=True`, and
+  otherwise uses `json.loads` and raises `OutputParserException`
+  (`output_parsers/openai_tools.py`, lines 52–69). The streaming tool-call path
+  is the one place where the partial parse reaches a finished message.
 - **JavaScript**, `@langchain/core` 1.2.18: `collapseToolCallChunks` calls
   `parsePartialJson` (`src/messages/utils.ts`, line 634 at `11bd193`). The
   truncated call in the LangGraph.js runs above comes out of this function.
