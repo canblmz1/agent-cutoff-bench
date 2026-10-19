@@ -69,4 +69,12 @@ OpenAI-compatible APIs only. Everything is in the repository: the server, one
 harness per client, and the server log of every run, so you can rerun it with
 no API key.
 
+One more limit worth naming. The fix is in the parser, and the agent layer has
+no check of its own: at `langchain-ai/langgraph` `main` on October 19, 2026,
+`prebuilt/tool_node.py` contains no reference to `finish_reason` or
+`invalid_tool_calls` — it runs whatever is in `message.tool_calls`. So a parser
+fix closes this route, not every route. An agent that wants to refuse a cut-off
+call also has to look at *why the model stopped*, not only at whether the
+arguments parse.
+
 Repository: https://github.com/simin-yuan/agent-cutoff-bench
