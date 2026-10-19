@@ -1,0 +1,5 @@
+{"t": 1792427150.911, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["patch", "read_file", "search_files", "write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792427150.949, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["patch", "read_file", "search_files", "write_file"], "tool_called": "write_file", "max_tokens_sent": {"max_tokens": 8192}}
+{"t": 1792427150.978, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["patch", "read_file", "search_files", "write_file"], "tool_called": "write_file", "max_tokens_sent": {"max_tokens": 32768}}
+{"t": 1792427151.003, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["patch", "read_file", "search_files", "write_file"], "tool_called": "write_file", "max_tokens_sent": {"max_tokens": 65536}}
+{"t": 1792427151.032, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["patch", "read_file", "search_files", "write_file"], "tool_called": "write_file", "max_tokens_sent": {"max_tokens": 131072}}

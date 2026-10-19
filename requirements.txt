@@ -1,0 +1,6 @@
+langgraph==1.2.16
+langchain-core==1.6.12
+langchain-openai==1.7.2
+openai-agents==0.24.0
+smolagents[openai]==1.26.0
+openai==3.35.1

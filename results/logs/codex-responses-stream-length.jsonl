@@ -1,0 +1,1 @@
+{"t": 1792427120.605, "mode": "length", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["exec_command", "write_stdin", "request_user_input", "view_image", "multi_agent_v1", "get_goal", "create_goal", "update_goal", "web_search"], "tool_called": "exec_command", "max_tokens_sent": {}}

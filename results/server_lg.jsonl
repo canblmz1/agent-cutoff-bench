@@ -1,0 +1,93 @@
+{"t": 1792425961.724, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425961.78, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792425964.283, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425964.319, "mode": "length", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792425966.591, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425966.63, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792425969.199, "mode": "reset", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425971.476, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425971.495, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792425974.528, "mode": "length", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425976.919, "mode": "drop", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425979.819, "mode": "reset", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425982.667, "mode": "complete", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425983.425, "mode": "complete", "endpoint": "responses", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792425986.572, "mode": "length", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425987.514, "mode": "length", "endpoint": "responses", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792425990.286, "mode": "drop", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425991.14, "mode": "drop", "endpoint": "responses", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792425993.848, "mode": "reset", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425997.662, "mode": "complete", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792425997.915, "mode": "complete", "endpoint": "responses", "stream": false, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426000.407, "mode": "length", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426003.1, "mode": "drop", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426005.93, "mode": "reset", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426028.195, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426028.477, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426031.206, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426031.476, "mode": "length", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "An error occurred while running the tool. Please try again."}
+{"t": 1792426034.52, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426034.804, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "An error occurred while running the tool. Please try again."}
+{"t": 1792426037.65, "mode": "reset", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426041.288, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426041.307, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426044.511, "mode": "length", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426044.545, "mode": "length", "endpoint": "chat", "stream": false, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "An error occurred while running the tool. Please try again."}
+{"t": 1792426047.574, "mode": "drop", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426050.652, "mode": "reset", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426053.961, "mode": "complete", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426054.586, "mode": "complete", "endpoint": "responses", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426057.978, "mode": "length", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426061.527, "mode": "drop", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426065.215, "mode": "reset", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426069.544, "mode": "complete", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426069.631, "mode": "complete", "endpoint": "responses", "stream": false, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426072.814, "mode": "length", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426076.069, "mode": "drop", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426079.028, "mode": "reset", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426100.559, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426100.667, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426100.78, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": [], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426102.578, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426102.63, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426102.673, "mode": "length", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": [], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426104.672, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426104.745, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426104.811, "mode": "drop", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": [], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426106.626, "mode": "reset", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426108.52, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426108.539, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426108.592, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": [], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426110.585, "mode": "length", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426110.613, "mode": "length", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426110.665, "mode": "length", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": [], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426112.533, "mode": "drop", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426114.533, "mode": "reset", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426149.46, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426209.401, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426269.286, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426329.318, "mode": "reset", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426330.51, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426330.542, "mode": "complete", "endpoint": "chat", "stream": false, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426331.657, "mode": "length", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426332.824, "mode": "drop", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426333.745, "mode": "reset", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426334.735, "mode": "complete", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426334.78, "mode": "complete", "endpoint": "responses", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426335.884, "mode": "length", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426335.968, "mode": "length", "endpoint": "responses", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792426337.139, "mode": "drop", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426337.198, "mode": "drop", "endpoint": "responses", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792426338.744, "mode": "reset", "endpoint": "responses", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426339.952, "mode": "complete", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426339.987, "mode": "complete", "endpoint": "responses", "stream": false, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426341.021, "mode": "length", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426342.12, "mode": "drop", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426343.446, "mode": "reset", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426532.721, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426532.796, "mode": "complete", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 2120 characters to report.txt"}
+{"t": 1792426533.872, "mode": "length", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426533.924, "mode": "length", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792426535.055, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792426535.122, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "after_tool_result", "tools_offered": ["write_file"], "tool_called": null, "max_tokens_sent": {}, "tool_result_seen": "Wrote 866 characters to report.txt"}
+{"t": 1792426536.348, "mode": "reset", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}

@@ -1,0 +1,1 @@
+{"t": 1792427095.542, "mode": "reset", "endpoint": "responses", "stream": false, "turn": "first", "tools_offered": ["write_file"], "tool_called": "write_file", "max_tokens_sent": {}}

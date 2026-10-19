@@ -1,0 +1,3 @@
+{"t": 1792427103.492, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792427103.548, "mode": "drop", "endpoint": "chat", "stream": true, "turn": "first", "tools_offered": ["write_file", "final_answer"], "tool_called": "write_file", "max_tokens_sent": {}}
+{"t": 1792427103.606, "mode": "drop", "endpoint": "chat", "stream": false, "turn": "first", "tools_offered": [], "tool_called": "write_file", "max_tokens_sent": {}}
