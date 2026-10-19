@@ -47,5 +47,5 @@ both = AIMessageChunk(
 ) + AIMessageChunk(content="", chunk_position="last")
 kept = [t["id"] for t in both.tool_calls]
 dropped = [t["id"] for t in both.invalid_tool_calls]
-print("4. parallel calls, kept:", kept, "| invalid:", dropped)
+print("4. parallel calls (summed chunks), kept:", kept, "| invalid:", dropped)
 print("   ->", "OK" if kept == ["1"] and dropped == ["2"] else "wrong split: a complete call was dropped, or a cut one survived")

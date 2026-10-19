@@ -34,7 +34,8 @@ line 17. The tool really writes to disk; the bench then reads the file back.
 
 Generated from [`results/runs.jsonl`](results/runs.jsonl) by `python summarize.py results/runs.jsonl`.
 The `complete` column is the control: every client runs the full call, so the
-bench can see execution when it happens.
+bench can see execution when it happens. In the `reset` column every client
+was run; "not run" means the connection error stopped the call.
 
 In every **RAN** cell the same thing happens:
 
@@ -108,7 +109,7 @@ A self-contained reproduction that needs no server is in
   | Complete call whose string holds a raw newline (accepted without streaming) | runs | **marked invalid** | runs |
   | Cut-off call read from summed chunks (`full = full + chunk`) | looks valid | **looks valid** | invalid |
   | Cut-off call returned by `invoke()` | looks valid | invalid | invalid |
-  | Two calls in one stream, one complete and one cut off | both run | both run | only the complete one |
+  | Two calls in one stream, one complete and one cut off, read from summed chunks | both run | both run | only the complete one |
 
   The patch applies to `langchain-ai/langchain` at `d670a3a` (October 19, 2026);
   `git apply --check` against the files from that commit is clean.
@@ -119,16 +120,16 @@ A self-contained reproduction that needs no server is in
   tests; without the patch 4 of them fail. In `tests/unit_tests/messages/test_ai.py`
   that is 19 passed / 4 failed without the patch and 23 passed with it.
 
-  Full `langchain-core` unit suite, Windows 11 / CPython 3.11, run both ways:
-  2,369 passed and 7 failed without the patch; 2,376–2,377 passed and 6–7
-  failed with it, the spread coming from a timing-sensitive rate-limit test
-  that fails intermittently on its own (1–3 of its 10 cases across five
-  isolated runs). Apart from that the failure sets are identical: three
-  symlink tests that need `SeCreateSymbolicLinkPrivilege`, two indexing tests,
-  and the rate-limit timing tests — none in message parsing. `ruff check` is
-  clean on the two changed files and `ruff format --check` passes for all 360
-  files (four pre-existing `ruff check` findings elsewhere in the tree are
-  untouched).
+  Full `langchain-core` unit suite, with and without the patch, on two machines:
+
+  - Linux, CPython 3.14: 2,383 passed with the patch and 2,376 without; the
+    same 9 tests fail both ways, all because the machine could not resolve
+    DNS. `make lint` (ruff, ruff format, mypy) passes.
+  - Windows 11, CPython 3.11: 2,376–2,377 passed with the patch and 2,369
+    without. The failures are the same set both ways: three symlink tests
+    that need `SeCreateSymbolicLinkPrivilege`, two indexing tests, and a
+    timing-sensitive rate-limit test that also fails intermittently on its
+    own. None is in message parsing.
 
   With the patch, the LangGraph rows above become "not run"
   for `length` and `drop`: [`results/with-core-fix/`](results/with-core-fix/).
@@ -207,7 +208,7 @@ Each run records its versions in `results/runs.jsonl`.
   empty answer, exactly as the non-streaming run already does. How an agent
   should surface `invalid_tool_calls` to the user is outside this bench.
 - The fix is in the parser, and LangGraph has no second line of defence:
-  `libs/prebuilt/langgraph/langgraph/prebuilt/tool_node.py` at
+  `libs/prebuilt/langgraph/prebuilt/tool_node.py` at
   `langchain-ai/langgraph` `main` (October 19, 2026) contains no reference to
   `finish_reason`, `invalid_tool_calls`, or truncation — it runs whatever is in
   `message.tool_calls`. So any path that produces a well-formed-looking
