@@ -1,0 +1,36 @@
+{
+    "classification":  "operator verification; independent evaluation pending",
+    "upstreamHead":  "e624cdb4967f77848df5f1b24b31c3b93e843b77",
+    "os":  "Windows 11, NT 10.0.26200.0 x64",
+    "node":  "22.23.2",
+    "npm":  "10.9.8",
+    "python":  "3.12.10",
+    "scope":  "Chat Completions streaming only; unchanged server.py and four existing modes",
+    "installation":  {
+                         "sourceOnlyCopy":  true,
+                         "noNodeModulesAtStart":  true,
+                         "separateEmptyNpmCache":  true,
+                         "command":  "npm ci --ignore-scripts --strict-peer-deps --no-audit --no-fund --prefer-online --cache \u003cnew empty cache\u003e",
+                         "packages":  19,
+                         "startedAt":  "2026-10-20T12:48:57.7811663Z",
+                         "finishedAt":  "2026-10-20T12:49:22.5180958Z",
+                         "exit":  0
+                     },
+    "verification":  {
+                         "command":  "npm test",
+                         "startedAt":  "2026-10-20T12:49:42.9509812Z",
+                         "finishedAt":  "2026-10-20T12:49:54.0465517Z",
+                         "exit":  0,
+                         "passed":  8,
+                         "total":  8,
+                         "reparseEntries":  0,
+                         "serverUnchanged":  true
+                     },
+    "lockSha256":  "d39ba0160d453b63ba052e8ee7b869d5c2257e4a2623c636770ad65111330f07",
+    "resultsSha256":  "f361977957011e59ffccf9865455c3ad0fea20bd4ca1b8521ebd807086600af9",
+    "limits":  [
+                   "No additional callback/disk protection demonstrated against native AI SDK for these fixtures.",
+                   "Only refusal versus error-result continuation differs on length/drop.",
+                   "No Linux validation, real model traffic, or independent maintainer run claimed."
+               ]
+}

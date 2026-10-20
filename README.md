@@ -163,6 +163,13 @@ python server.py 8765 &
 cd harness && python run_langgraph.py http://127.0.0.1:8765 length chat stream
 ```
 
+An optional [paired AI SDK / PSJ harness](harness/ai-sdk/README.md) runs the
+same four Chat Completions streaming fixtures with native AI SDK and
+`psj-ai-sdk@0.3.2`. It has an isolated npm lockfile and does not change the
+default matrix or LangChain dependencies. Both clients release zero callbacks
+for the cut-off fixtures; the comparison records their different error-result
+continuation policies. It is not a LangChain fix or an independent-use claim.
+
 ## Versions
 
 | Client | Version |
