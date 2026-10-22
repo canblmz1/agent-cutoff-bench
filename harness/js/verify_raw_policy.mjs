@@ -104,6 +104,7 @@ for (const mode of ["complete", "length", "drop", "reset"]) {
   const projection = (record) => ({ disk: record.disk, successful_writes: record.raw_policy.successful_writes,
     write_attempts: record.raw_policy.write_attempts, callbacks: record.raw_policy.callbacks,
     outcome: record.outcome, final_answer: record.final_answer, tool_messages: record.tool_messages,
+    sdk_tool_calls: record.raw_policy.sdk_tool_calls, tool_result_details: record.raw_policy.tool_messages,
     requests: record.raw_policy.observations.map((r) => r.request) });
   assert.deepEqual(projection(group.find((r) => r.raw_policy.client === "native-check")),
     projection(group.find((r) => r.raw_policy.client === "psj")), `${mode}: compare real native-check / PSJ outcomes`);

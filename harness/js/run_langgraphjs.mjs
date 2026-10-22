@@ -21,6 +21,7 @@ const [base, mode, api, streaming, rawPolicy] = process.argv.slice(2);
 const d = mkdtempSync(join(tmpdir(), "cutoff-"));
 const calls = [];
 let successfulWrites = 0;
+let observedMessages;
 const inputSchema = z.object({ path: z.string(), content: z.string() });
 const policy = rawPolicy ? await import("./raw_policy.mjs")
   .then(({ createRawPolicy }) => createRawPolicy(rawPolicy, inputSchema)) : undefined;
@@ -52,6 +53,11 @@ try {
   const out = await agent.invoke({ messages: [{ role: "user", content: "Write the 40-line report to report.txt." }] },
                                  { recursionLimit: 6 });
   const ai = out.messages.filter((m) => m._getType() === "ai");
+  if (policy) observedMessages = {
+    sdk_tool_calls: ai.flatMap((m) => (m.tool_calls ?? []).map((c) => ({ id: c.id, name: c.name, args: c.args }))),
+    tool_messages: out.messages.filter((m) => m._getType() === "tool")
+      .map((m) => ({ id: m.tool_call_id, name: m.name, status: m.status ?? null, content: m.content })),
+  };
   rec.outcome = "returned";
   const c = ai.length ? ai[ai.length - 1].content : "";
   rec.final_answer = (typeof c === "string" ? c : JSON.stringify(c)).slice(0, 200);
@@ -71,7 +77,8 @@ if (existsSync(p)) {
   rec.disk = { file_written: true, bytes: Buffer.byteLength(data), newline_terminated_lines: nl, last_line: last,
                complete: nl === 40 && last.startsWith("line 40") };
 } else rec.disk = { file_written: false };
-if (policy) rec.raw_policy = { ...policy.report(), successful_writes: successfulWrites, write_attempts: calls.length };
+if (policy) rec.raw_policy = { ...policy.report(), ...observedMessages,
+  successful_writes: successfulWrites, write_attempts: calls.length };
 const line = JSON.stringify(rec);
 console.log(line);
 if (process.env.BENCH_RESULT) appendFileSync(process.env.BENCH_RESULT, line + "\n");
