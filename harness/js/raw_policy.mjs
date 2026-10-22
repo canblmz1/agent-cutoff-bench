@@ -70,11 +70,13 @@ export async function createRawPolicy(client, schema) {
       const body = JSON.parse(init.body);
       const request = { tool_result_ids: (body.messages ?? []).filter((m) => m.role === "tool").map((m) => m.tool_call_id),
         tool_results: (body.messages ?? []).filter((m) => m.role === "tool").map((m) => m.content) };
-      const response = await fetch(url, init);
-      if (!response.ok) throw new Error(`Unexpected benchmark HTTP status ${response.status}`);
-      const reader = response.body.getReader(), chunks = [];
-      let size = 0, transportError;
+      const chunks = [];
+      let response, size = 0, transportError, transportPhase = "fetch";
       try {
+        response = await fetch(url, init);
+        if (!response.ok) throw new Error(`Unexpected benchmark HTTP status ${response.status}`);
+        transportPhase = "read";
+        const reader = response.body.getReader();
         for (;;) {
           const part = await reader.read();
           if (part.done) break;
@@ -89,6 +91,7 @@ export async function createRawPolicy(client, schema) {
       const decoded = envelopes(bytes), calls = rawCalls(decoded.events);
       const record = { request, bytes: bytes.length, body_sha256: hash(bytes), wire_file: wireFile,
         eof: !transportError, done: decoded.done,
+        response_received: Boolean(response), transport_phase: transportError ? transportPhase : null,
         transport_error: transportError ? `${transportError.name}: ${transportError.message}` : null,
         framing_error: decoded.error?.message ?? null,
         // Only volatile provider timestamps are omitted from this fingerprint.

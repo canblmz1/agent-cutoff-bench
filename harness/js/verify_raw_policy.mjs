@@ -75,17 +75,30 @@ for (const mode of ["complete", "length", "drop", "reset"]) {
         assert.equal(policy.observations.length, 2);
         assert.deepEqual(policy.observations[1].request.tool_result_ids, ["call_bench_1"]);
         assert.deepEqual(policy.callbacks.map((c) => [c.id, c.name, c.allowed]), [["call_bench_1", "write_file", true]]);
+        assert.equal(policy.tool_messages[0].status, "success");
         assert.match(record.server_requests[1].tool_result_seen, /^Wrote 2120 characters/);
       } else if (client !== "native" || mode === "reset") {
         assert.equal(policy.successful_writes, 0, `${id}: no guarded side effect`);
         assert.equal(policy.write_attempts, 0, `${id}: refusal before writeFileSync`);
         assert.equal(record.disk.file_written, false, `${id}: actual disk state`);
+      } else {
+        assert.equal(policy.successful_writes, 1, `${id}: observed native truncated write`);
+        assert.equal(record.disk.bytes, 866, `${id}: existing repaired argument projection`);
+        assert.equal(record.disk.complete, false);
+      }
+      if (["length", "drop"].includes(mode)) {
+        assert.equal(record.outcome, "returned");
+        assert.equal(record.final_answer, "Done.");
+        assert.equal(policy.observations.length, 2, `${id}: actual tool-result continuation`);
+        assert.deepEqual(policy.observations[1].request.tool_result_ids, ["call_bench_1"]);
+        assert.equal(policy.tool_messages[0].status, client === "native" ? "success" : "error");
       }
       if (mode === "reset") {
         assert.equal(record.outcome, "raised");
         assert.ok(policy.observations[0].transport_error, `${id}: preserve first read error`);
         assert.equal(policy.observations[0].eof, false);
-        assert.ok(policy.observations[0].bytes > 0, `${id}: retain received prefix`);
+        assert.ok(["fetch", "read"].includes(policy.observations[0].transport_phase));
+        if (!policy.observations[0].response_received) assert.equal(policy.observations[0].bytes, 0);
       }
       console.log(JSON.stringify({ mode, client, writes: policy.successful_writes,
         bytes: record.disk.bytes ?? 0, requests: record.server_requests.length, outcome: record.outcome,
@@ -97,10 +110,15 @@ for (const mode of ["complete", "length", "drop", "reset"]) {
   }
   const group = records.filter((record) => record.mode === mode);
   assert.equal(new Set(group.map((r) => JSON.stringify(r.versions))).size, 1, `${mode}: identical installed SDK versions`);
-  assert.equal(new Set(group.map((r) => r.raw_policy.observations[0].lifecycle_sha256)).size, 1,
-    `${mode}: identical original lifecycle except provider created timestamp`);
-  assert.equal(new Set(group.map((r) => JSON.stringify(r.raw_policy.observations[0].arguments))).size, 1,
-    `${mode}: identical original argument hashes, IDs, names and finish reasons`);
+  // An abrupt TCP reset can be observed before headers or during the body.
+  // Preserve that real delivery difference; it is a transport control, not
+  // evidence of identical delivered inputs across the three clients.
+  if (mode !== "reset") {
+    assert.equal(new Set(group.map((r) => r.raw_policy.observations[0].lifecycle_sha256)).size, 1,
+      `${mode}: identical original lifecycle except provider created timestamp`);
+    assert.equal(new Set(group.map((r) => JSON.stringify(r.raw_policy.observations[0].arguments))).size, 1,
+      `${mode}: identical original argument hashes, IDs, names and finish reasons`);
+  }
   const projection = (record) => ({ disk: record.disk, successful_writes: record.raw_policy.successful_writes,
     write_attempts: record.raw_policy.write_attempts, callbacks: record.raw_policy.callbacks,
     outcome: record.outcome, final_answer: record.final_answer, tool_messages: record.tool_messages,
@@ -114,6 +132,8 @@ const summary = { cases: records.length, versions: records[0].versions, node: pr
     writes: r.raw_policy.successful_writes, bytes: r.disk.bytes ?? 0,
     requests: r.server_requests.length, final_answer: r.final_answer, outcome: r.outcome })),
   conclusion: "Measured native-check/PSJ equivalence; maintenance preference and independent use unverified",
+  pairedModes: ["complete", "length", "drop"],
+  resetControl: "Real TCP reset; observed delivery can differ; all clients must refuse before writes",
   output, timestampsExcludedFromFingerprintOnly: true, fixtures: "existing four single-call server modes" };
 writeFileSync(join(output, "summary.json"), JSON.stringify(summary, null, 2) + "\n");
 console.log(`Verified ${records.length}/12 LangGraph.js cases; raw records and captures retained at ${output}`);
