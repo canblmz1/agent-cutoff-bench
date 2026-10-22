@@ -63,7 +63,7 @@ checks enabled, no existing `node_modules`, links or overlays.
 
 - Retained pins: clean `npm ci` exit 0; **12/12**, exit 0. Runtime/test source
   `7d88b2fb82ffe8c5ce6fea605e991523e7dd2914`.
-- Independent second operator run: current registry core **1.3.0**, OpenAI
+- Separate second operator validation: current registry core **1.3.0**, OpenAI
   **1.7.0**, LangGraph **1.5.2**, same Zod and PSJ. Clean `npm ci` with
   `--engine-strict` exit 0; one invocation, **12/12**, exit 0. Isolated
   validation head `0d30e3562c843663e8ecc9e4746045c4bb49e516`; only three SDK
