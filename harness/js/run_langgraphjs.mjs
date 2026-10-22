@@ -17,24 +17,30 @@ const require = createRequire(import.meta.url);
 for (const k of ["_getEstimatedTokenCountFromPrompt", "_getNumTokensFromGenerations"]) {
   for (const C of [BaseChatOpenAI, ChatOpenAICompletions]) if (typeof C.prototype[k] === "function") C.prototype[k] = async () => 0;
 }
-const [base, mode, api, streaming] = process.argv.slice(2);
+const [base, mode, api, streaming, rawPolicy] = process.argv.slice(2);
 const d = mkdtempSync(join(tmpdir(), "cutoff-"));
 const calls = [];
+let successfulWrites = 0;
+const inputSchema = z.object({ path: z.string(), content: z.string() });
+const policy = rawPolicy ? await import("./raw_policy.mjs")
+  .then(({ createRawPolicy }) => createRawPolicy(rawPolicy, inputSchema)) : undefined;
 
 const writeFile = tool(
-  async ({ path, content }) => {
+  async (input, config) => {
+    const { path, content } = policy ? policy.take(input, config) : input;
     calls.push({ path, content_chars: content.length });
     writeFileSync(join(d, basename(path)), content, "utf8");
+    successfulWrites++;
     return `Wrote ${content.length} characters to ${basename(path)}`;
   },
   { name: "write_file", description: "Write content to a file.",
-    schema: z.object({ path: z.string(), content: z.string() }) },
+    schema: inputSchema },
 );
 
 const llm = new ChatOpenAI({
   model: "bench-model", apiKey: "sk-bench", streaming: streaming === "stream",
   useResponsesApi: api === "responses", maxRetries: 0,
-  configuration: { baseURL: `${base}/${mode}/v1` },
+  configuration: { baseURL: `${base}/${mode}/v1`, ...(policy ? { fetch: policy.fetch } : {}) },
 });
 const agent = createReactAgent({ llm, tools: [writeFile] });
 
@@ -65,6 +71,7 @@ if (existsSync(p)) {
   rec.disk = { file_written: true, bytes: Buffer.byteLength(data), newline_terminated_lines: nl, last_line: last,
                complete: nl === 40 && last.startsWith("line 40") };
 } else rec.disk = { file_written: false };
+if (policy) rec.raw_policy = { ...policy.report(), successful_writes: successfulWrites, write_attempts: calls.length };
 const line = JSON.stringify(rec);
 console.log(line);
 if (process.env.BENCH_RESULT) appendFileSync(process.env.BENCH_RESULT, line + "\n");
