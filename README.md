@@ -232,6 +232,13 @@ Each run records its versions in `results/runs.jsonl`.
 the same fake-server method for a different failure: a reply that turns into a
 repetition loop and is never cut.
 
+## Record
+
+- Discovered: 2026-10-19
+- First reported upstream: langchain#41285 by @taguacil (2026-10-17)
+- First public: 2026-10-19
+- Patch commit: `c998c402b045` (on `simin-yuan/langchain`, branch `core/truncated-streamed-tool-calls`; not merged upstream)
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
