@@ -228,6 +228,7 @@ repetition loop and is never cut.
 ## Record
 
 - Discovered: 2026-10-19
+- First reported upstream: langchain#41285 by @taguacil (2026-10-17)
 - First public: 2026-10-19
 - Patch commit: `c998c402b045` (on `simin-yuan/langchain`, branch `core/truncated-streamed-tool-calls`; not merged upstream)
 
